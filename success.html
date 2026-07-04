@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thank You — WaveHost</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" href="images/logo.png" type="image/png" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@700;800;900&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:    #050e1f;
+      --navy2:   #061e42;
+      --blue:    #1a7fd4;
+      --cyan:    #00c4e8;
+      --white:   #ffffff;
+      --off:     #e8f4ff;
+      --muted:   #8bafc9;
+      --glass:   rgba(255,255,255,0.05);
+      --border:  rgba(255,255,255,0.10);
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: 'Inter', sans-serif;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      background: linear-gradient(160deg, var(--navy) 0%, var(--navy2) 55%, #0a1a38 100%);
+      position: relative; overflow-x: hidden;
+      color: var(--off); padding: 2rem 1rem;
+    }
+
+    /* Animated background rings */
+    .rings { position: fixed; top: 50%; left: 50%; pointer-events: none; z-index: 0; }
+    .ring {
+      position: absolute; border-radius: 50%;
+      border: 1px solid rgba(0,196,232,0.07);
+      top: 50%; left: 50%; transform: translate(-50%,-50%);
+      animation: ringPulse 4s ease-in-out infinite;
+    }
+    .ring:nth-child(1) { width:260px; height:260px; }
+    .ring:nth-child(2) { width:460px; height:460px; animation-delay:.7s; border-color:rgba(0,196,232,.04); }
+    .ring:nth-child(3) { width:660px; height:660px; animation-delay:1.4s; border-color:rgba(0,196,232,.025); }
+    .ring:nth-child(4) { width:880px; height:880px; animation-delay:2s; border-color:rgba(0,196,232,.015); }
+    @keyframes ringPulse {
+      0%,100% { opacity:.5; transform:translate(-50%,-50%) scale(1); }
+      50%      { opacity:1;  transform:translate(-50%,-50%) scale(1.03); }
+    }
+
+    /* Floating particles */
+    .particles { position:fixed; inset:0; pointer-events:none; z-index:0; overflow:hidden; }
+    .particle {
+      position:absolute; border-radius:50%; background:var(--cyan); opacity:0;
+      animation: pRise linear infinite;
+    }
+    @keyframes pRise {
+      0%   { opacity:0; transform:translateY(0) scale(.5); }
+      20%  { opacity:.3; }
+      80%  { opacity:.1; }
+      100% { opacity:0; transform:translateY(-80vh) scale(1); }
+    }
+
+    /* Main card */
+    .card {
+      position: relative; z-index: 2;
+      background: var(--glass);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      padding: 2.75rem 2.5rem;
+      max-width: 580px; width: 100%;
+      text-align: center;
+      animation: cardIn .7s cubic-bezier(.22,1,.36,1) forwards;
+    }
+    @keyframes cardIn {
+      from { opacity:0; transform:translateY(34px) scale(.97); }
+      to   { opacity:1; transform:translateY(0)    scale(1);   }
+    }
+
+    .logo { height: 38px; margin: 0 auto 2rem; display: block; }
+
+    /* Check circle */
+    .check-circle {
+      width: 86px; height: 86px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue), var(--cyan));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.2rem; margin: 0 auto 1.6rem;
+      animation: popIn .55s cubic-bezier(.175,.885,.32,1.275) .1s both,
+                 glow 2.5s ease-in-out 1s infinite;
+    }
+    @keyframes popIn {
+      from { transform:scale(0); opacity:0; }
+      to   { transform:scale(1); opacity:1; }
+    }
+    @keyframes glow {
+      0%,100% { box-shadow:0 0 0 0 rgba(0,196,232,.4); }
+      50%      { box-shadow:0 0 0 20px rgba(0,196,232,0); }
+    }
+
+    .badge {
+      display: inline-flex; align-items: center; gap: .4rem;
+      background: rgba(0,196,232,.1); border: 1px solid rgba(0,196,232,.25);
+      border-radius: 50px; padding: .32rem .9rem;
+      font-size: .72rem; font-weight: 600; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--cyan); margin-bottom: 1rem;
+    }
+
+    h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(1.9rem, 5.5vw, 2.8rem);
+      font-weight: 800; color: var(--white); line-height: 1.15; margin-bottom: .75rem;
+    }
+    h1 span { color: var(--cyan); }
+
+    .subtitle {
+      font-size: .98rem; color: var(--muted); line-height: 1.7;
+      max-width: 420px; margin: 0 auto 1.75rem;
+    }
+
+    /* Steps */
+    .steps {
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.07);
+      border-radius: 14px; padding: 1.3rem 1.5rem;
+      margin-bottom: 2rem; text-align: left;
+      display: flex; flex-direction: column; gap: .75rem;
+    }
+    .step { display:flex; align-items:flex-start; gap:.65rem; font-size:.84rem; color:var(--muted); }
+    .sn {
+      min-width:22px; height:22px; border-radius:50%;
+      background: linear-gradient(135deg, var(--blue), var(--cyan));
+      display:flex; align-items:center; justify-content:center;
+      font-size:.68rem; font-weight:700; color:var(--navy); flex-shrink:0; margin-top:1px;
+    }
+
+    /* ---- PAYMENT SECTION ---- */
+    .pay-section {
+      background: rgba(0,196,232,.05);
+      border: 1px solid rgba(0,196,232,.18);
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin-bottom: 1.75rem;
+    }
+    .pay-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1rem; font-weight: 700;
+      color: var(--white); margin-bottom: .3rem;
+    }
+    .pay-sub { font-size: .82rem; color: var(--muted); margin-bottom: 1.25rem; }
+
+    .pay-cards { display: grid; grid-template-columns: 1fr 1fr; gap: .85rem; }
+
+    .pay-card {
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 12px; padding: 1.1rem .9rem;
+      text-decoration: none; display: flex; flex-direction: column;
+      align-items: center; gap: .4rem;
+      transition: transform .25s, border-color .25s, box-shadow .25s;
+      position: relative; overflow: hidden;
+    }
+    .pay-card::before {
+      content:''; position:absolute; top:0; left:0; right:0; height:2px;
+      background: linear-gradient(90deg, var(--blue), var(--cyan));
+    }
+    .pay-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(0,196,232,.35);
+      box-shadow: 0 10px 28px rgba(0,196,232,.15);
+    }
+    .pay-card .plan-label {
+      font-size: .7rem; font-weight: 600; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--cyan);
+    }
+    .pay-card .plan-price {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.55rem; font-weight: 800; color: var(--white); line-height: 1;
+    }
+    .pay-card .plan-price sup { font-size: .8rem; vertical-align: super; }
+    .pay-card .plan-price small { font-size: .7rem; color: var(--muted); font-weight: 400; }
+    .pay-card .plan-name { font-size: .78rem; color: var(--muted); }
+    .pay-card .stripe-btn {
+      margin-top: .5rem;
+      background: linear-gradient(135deg, var(--blue), var(--cyan));
+      color: var(--navy); font-weight: 700; font-size: .78rem;
+      padding: .45rem 1rem; border-radius: 50px; border: none;
+      width: 100%; cursor: pointer; font-family: 'Inter', sans-serif;
+      transition: opacity .2s;
+    }
+    .pay-card .stripe-btn:hover { opacity: .9; }
+    .pay-note { font-size: .73rem; color: var(--muted); margin-top: .85rem; text-align: center; }
+    .pay-note span { color: var(--cyan); }
+
+    /* ---- BOTTOM BUTTONS ---- */
+    .btn-group { display: flex; flex-direction: column; gap: .8rem; align-items: center; }
+
+    .btn-home {
+      display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+      width: 100%; max-width: 380px;
+      background: linear-gradient(135deg, var(--blue), var(--cyan));
+      color: var(--navy); font-family: 'Inter', sans-serif;
+      font-weight: 700; font-size: .98rem;
+      padding: .95rem 2rem; border-radius: 50px;
+      text-decoration: none;
+      box-shadow: 0 6px 22px rgba(0,196,232,.32);
+      transition: transform .25s, box-shadow .25s;
+    }
+    .btn-home:hover { transform:translateY(-3px); box-shadow:0 10px 30px rgba(0,196,232,.48); }
+
+    .btn-secondary {
+      display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+      width: 100%; max-width: 380px;
+      background: transparent; color: var(--off);
+      font-family: 'Inter', sans-serif; font-weight: 600; font-size: .88rem;
+      padding: .82rem 2rem; border-radius: 50px;
+      text-decoration: none;
+      border: 1.5px solid rgba(255,255,255,.14);
+      transition: border-color .25s, color .25s, transform .25s;
+    }
+    .btn-secondary:hover { border-color:var(--cyan); color:var(--cyan); transform:translateY(-2px); }
+
+    .footer-note {
+      margin-top: 1.75rem; font-size: .76rem;
+      color: rgba(139,175,201,.4);
+    }
+    .footer-note a { color: var(--cyan); opacity:.7; text-decoration:none; }
+    .footer-note a:hover { opacity:1; }
+
+    @media(max-width:420px) {
+      .card { padding: 2rem 1.4rem; }
+      .pay-cards { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="rings">
+    <div class="ring"></div><div class="ring"></div>
+    <div class="ring"></div><div class="ring"></div>
+  </div>
+  <div class="particles" id="particles"></div>
+
+  <div class="card">
+
+    <img src="images/logo.png" alt="WaveHost" class="logo" />
+
+    <div class="check-circle">✓</div>
+
+    <div class="badge">✓ Submission Received</div>
+
+    <h1>Thank <span>You!</span></h1>
+
+    <p class="subtitle">
+      Your message has been received. We'll be in touch by email or phone within a few hours to confirm your order details.
+    </p>
+
+    <div class="steps">
+      <div class="step"><div class="sn">1</div><span>We've received your submission and are reviewing it now</span></div>
+      <div class="step"><div class="sn">2</div><span>We'll contact you within a few hours to confirm details</span></div>
+      <div class="step"><div class="sn">3</div><span>Complete your payment below to lock in your plan</span></div>
+      <div class="step"><div class="sn">4</div><span>Your website goes live within 48 hours of payment 🚀</span></div>
+    </div>
+
+    <!-- PAYMENT SECTION -->
+    <div class="pay-section">
+      <div class="pay-title">💳 Complete Your Payment</div>
+      <div class="pay-sub">Secure checkout via Stripe — choose your plan below</div>
+
+      <div class="pay-cards">
+
+        <!-- €50 Static -->
+        <a href="https://buy.stripe.com/cNifZi4MOdCXe7p93Zcwg00" target="_blank" rel="noopener" class="pay-card">
+          <div class="plan-label">Static Site</div>
+          <div class="plan-price"><sup>€</sup>50<small>/yr</small></div>
+          <div class="plan-name">Up to 10 pages</div>
+          <div class="stripe-btn">Pay €50 →</div>
+        </a>
+
+        <!-- €150 WordPress -->
+        <a href="https://buy.stripe.com/5kQbJ26UW2Yj1kDdkfcwg01" target="_blank" rel="noopener" class="pay-card">
+          <div class="plan-label">WordPress</div>
+          <div class="plan-price"><sup>€</sup>150<small>/yr</small></div>
+          <div class="plan-name">Full featured</div>
+          <div class="stripe-btn">Pay €150 →</div>
+        </a>
+
+      </div>
+
+      <div class="pay-note">
+        🔒 Secured by <span>Stripe</span> · Your card details are never stored by WaveHost
+      </div>
+    </div>
+
+    <!-- BACK HOME BUTTONS -->
+    <div class="btn-group">
+      <a href="https://wavehost.ie" class="btn-home">
+        🏠 Back to wavehost.ie
+      </a>
+      <a href="https://wavehost.ie/order.html" class="btn-secondary">
+        📋 View Order Page
+      </a>
+    </div>
+
+    <div class="footer-note">
+      WaveHost · Dublin, Ireland &nbsp;·&nbsp;
+      <a href="https://wavehost.ie/contact.html">Contact Us</a> &nbsp;·&nbsp;
+      <a href="https://wavehost.ie/gdpr.html">Privacy Policy</a>
+    </div>
+
+  </div>
+
+  <script>
+    const c = document.getElementById('particles');
+    for (let i = 0; i < 22; i++) {
+      const p = document.createElement('div');
+      p.className = 'particle';
+      const s = Math.random() * 4 + 2;
+      p.style.cssText = `width:${s}px;height:${s}px;left:${Math.random()*100}%;bottom:${Math.random()*15}%;animation-duration:${9+Math.random()*12}s;animation-delay:${Math.random()*9}s;`;
+      c.appendChild(p);
+    }
+  </script>
+
+</body>
+</html>
